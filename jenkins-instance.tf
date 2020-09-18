@@ -28,7 +28,7 @@ resource "aws_instance" "jenkins-instance" {
   key_name        = aws_key_pair.tf-jenkins-aws.key_name
   vpc_security_group_ids = [aws_security_group.sg_allow_ssh_jenkins.id]
   subnet_id          = aws_subnet.public-subnet-1.id
-  user_data = file("install_jenkins.sh")
+  user_data = file(var.install_jenkins)
 
   associate_public_ip_address = true
   tags = {
