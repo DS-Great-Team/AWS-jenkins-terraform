@@ -17,6 +17,10 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
+data "template_file" "init" {
+  template = file(var.install_jenkins)
+}
+
 resource "aws_key_pair" "tf-jenkins-aws" {
   key_name   = "tf-jenkins-aws"
   public_key = file(var.ssh_key)
@@ -29,7 +33,6 @@ resource "aws_instance" "jenkins-instance" {
   vpc_security_group_ids = [aws_security_group.sg_allow_ssh_jenkins.id]
   subnet_id          = aws_subnet.public-subnet-1.id
   user_data = file(var.install_jenkins)
-
   associate_public_ip_address = true
   tags = {
     Name = "Jenkins-Instance"
@@ -68,8 +71,4 @@ resource "aws_security_group" "sg_allow_ssh_jenkins" {
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
   }
-}
-
-output "jenkins_ip_address" {
-  value = aws_instance.jenkins-instance.public_dns
 }
