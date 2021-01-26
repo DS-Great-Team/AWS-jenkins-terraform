@@ -43,4 +43,4 @@ firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 
 echo "View the credentials"
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+# cat /var/lib/jenkins/secrets/initialAdminPassword

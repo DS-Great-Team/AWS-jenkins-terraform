@@ -45,5 +45,5 @@ variable "ssh_key" {
 }
 
 variable "install_jenkins" {
-  default     = "~/gitub/jenkins-terraform/scripts/install_jenkins.sh"
+  default     = "~/github/AWS-jenkins-terraform/scripts/install_jenkins.sh"
 }
